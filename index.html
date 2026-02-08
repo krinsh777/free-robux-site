@@ -142,14 +142,6 @@
         </aside>
 
         <script>
-            // Function to hide all popups and notifications
-            function hideAllPopups() {
-                const modal = document.getElementById("robux-modal");
-                const notify = document.getElementById('timer-notification');
-                if (modal) modal.style.display = "none";
-                if (notify) notify.style.display = "none";
-            }
-
             // Modal Logic
             const modal = document.getElementById("robux-modal");
             const btn = document.getElementById("open-robux-modal");
@@ -163,24 +155,10 @@
 
             if (span) {
                 span.addEventListener('click', () => {
-                    const successCard = modal.querySelector('.success-card');
-                    if (successCard) {
-                        hideAllPopups();
-                    } else {
-                        alert("Please fill out and submit the form to join the giveaway and close this window! 🎁🌟");
-                    }
+                    modal.style.display = "none";
                 });
             }
 
-            // Allow closing by clicking outside if already submitted
-            window.addEventListener('click', (event) => {
-                if (event.target == modal) {
-                    const successCard = modal.querySelector('.success-card');
-                    if (successCard) {
-                        hideAllPopups();
-                    }
-                }
-            });
 
             // Auto-open modal on mobile when page loads
             window.addEventListener('load', () => {
@@ -239,7 +217,7 @@
 
                         if (response.ok) {
                             // Close the modal immediately
-                            hideAllPopups();
+                            modal.style.display = "none";
 
                             // Show the success message as a notification
                             const notify = document.getElementById('timer-notification');
