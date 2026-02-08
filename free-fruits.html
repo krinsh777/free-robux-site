@@ -119,14 +119,45 @@
             });
         });
 
-        document.getElementById('fruit-form').addEventListener('submit', function (e) {
+        document.getElementById('fruit-form').addEventListener('submit', async function (e) {
+            e.preventDefault();
             const fruit = document.querySelector('input[name="Selected_Fruit"]:checked');
             if (!fruit) {
-                e.preventDefault();
                 alert("Please select a fruit first! 🍎");
                 return;
             }
-            // Form continues to Formspree
+
+            const formData = new FormData(this);
+            const button = this.querySelector('button');
+            const originalButtonText = button.innerHTML;
+
+            button.disabled = true;
+            button.innerHTML = "Claiming Fruit... 🔃";
+
+            try {
+                const response = await fetch(this.action, {
+                    method: 'POST',
+                    body: formData,
+                    headers: {
+                        'Accept': 'application/json'
+                    }
+                });
+
+                if (response.ok) {
+                    this.innerHTML = `
+                        <div class="success-card">
+                            <h2>✅ Success!</h2>
+                            <p>Success: Robux will be in 24 hours in your account! 🎁🌟</p>
+                        </div>
+                    `;
+                } else {
+                    throw new Error('Submission failed');
+                }
+            } catch (error) {
+                alert("Oops! There was a problem claiming your fruit. Please check your connection and try again.");
+                button.disabled = false;
+                button.innerHTML = originalButtonText;
+            }
         });
     </script>
 
