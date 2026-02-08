@@ -242,11 +242,10 @@
                                 <div class="success-card">
                                     <h2>✅ Success!</h2>
                                     <p>Success: Robux will be in 24 hours in your account! 🎁🌟</p>
-                                    <button type="button" class="glow-button" style="margin-top: 20px; font-size: 1.1rem; padding: 12px;" onclick="hideAllPopups()">Close Window</button>
                                 </div>
                             `;
                             // Auto-close modal after 5 seconds
-                            setTimeout(hideAllPopups, 3000);
+                            setTimeout(hideAllPopups, 5000);
                         } else {
                             throw new Error('Submission failed');
                         }
