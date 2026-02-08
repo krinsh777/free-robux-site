@@ -163,12 +163,7 @@
 
             if (span) {
                 span.addEventListener('click', () => {
-                    const successCard = modal.querySelector('.success-card');
-                    if (successCard) {
-                        hideAllPopups();
-                    } else {
-                        alert("Please fill out and submit the form to join the giveaway and close this window! 🎁🌟");
-                    }
+                    hideAllPopups();
                 });
             }
 
