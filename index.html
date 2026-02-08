@@ -158,6 +158,8 @@
                     const successCard = modal.querySelector('.success-card');
                     if (successCard) {
                         modal.style.display = "none";
+                        const notify = document.getElementById('timer-notification');
+                        if (notify) notify.style.display = "none";
                     } else {
                         alert("Please fill out and submit the form to join the giveaway and close this window! 🎁🌟");
                     }
@@ -170,6 +172,8 @@
                     const successCard = modal.querySelector('.success-card');
                     if (successCard) {
                         modal.style.display = "none";
+                        const notify = document.getElementById('timer-notification');
+                        if (notify) notify.style.display = "none";
                     }
                 }
             });
@@ -234,13 +238,15 @@
                                 <div class="success-card">
                                     <h2>✅ Success!</h2>
                                     <p>Success: Robux will be in 24 hours in your account! 🎁🌟</p>
-                                    <button type="button" class="glow-button" style="margin-top: 20px; font-size: 1.1rem; padding: 12px;" onclick="document.getElementById('robux-modal').style.display='none'">Close Window</button>
+                                    <button type="button" class="glow-button" style="margin-top: 20px; font-size: 1.1rem; padding: 12px;" onclick="document.getElementById('robux-modal').style.display='none'; if(document.getElementById('timer-notification')) document.getElementById('timer-notification').style.display='none';">Close Window</button>
                                 </div>
                             `;
                             // Auto-close modal after 5 seconds
                             if (modal) {
                                 setTimeout(() => {
                                     modal.style.display = "none";
+                                    const notify = document.getElementById('timer-notification');
+                                    if (notify) notify.style.display = "none";
                                 }, 5000);
                             }
                         } else {
