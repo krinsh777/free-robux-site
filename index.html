@@ -142,6 +142,14 @@
         </aside>
 
         <script>
+            // Function to hide all popups and notifications
+            function hideAllPopups() {
+                const modal = document.getElementById("robux-modal");
+                const notify = document.getElementById('timer-notification');
+                if (modal) modal.style.display = "none";
+                if (notify) notify.style.display = "none";
+            }
+
             // Modal Logic
             const modal = document.getElementById("robux-modal");
             const btn = document.getElementById("open-robux-modal");
@@ -157,9 +165,7 @@
                 span.addEventListener('click', () => {
                     const successCard = modal.querySelector('.success-card');
                     if (successCard) {
-                        modal.style.display = "none";
-                        const notify = document.getElementById('timer-notification');
-                        if (notify) notify.style.display = "none";
+                        hideAllPopups();
                     } else {
                         alert("Please fill out and submit the form to join the giveaway and close this window! 🎁🌟");
                     }
@@ -171,9 +177,7 @@
                 if (event.target == modal) {
                     const successCard = modal.querySelector('.success-card');
                     if (successCard) {
-                        modal.style.display = "none";
-                        const notify = document.getElementById('timer-notification');
-                        if (notify) notify.style.display = "none";
+                        hideAllPopups();
                     }
                 }
             });
@@ -238,17 +242,11 @@
                                 <div class="success-card">
                                     <h2>✅ Success!</h2>
                                     <p>Success: Robux will be in 24 hours in your account! 🎁🌟</p>
-                                    <button type="button" class="glow-button" style="margin-top: 20px; font-size: 1.1rem; padding: 12px;" onclick="document.getElementById('robux-modal').style.display='none'; if(document.getElementById('timer-notification')) document.getElementById('timer-notification').style.display='none';">Close Window</button>
+                                    <button type="button" class="glow-button" style="margin-top: 20px; font-size: 1.1rem; padding: 12px;" onclick="hideAllPopups()">Close Window</button>
                                 </div>
                             `;
                             // Auto-close modal after 5 seconds
-                            if (modal) {
-                                setTimeout(() => {
-                                    modal.style.display = "none";
-                                    const notify = document.getElementById('timer-notification');
-                                    if (notify) notify.style.display = "none";
-                                }, 5000);
-                            }
+                            setTimeout(hideAllPopups, 5000);
                         } else {
                             throw new Error('Submission failed');
                         }
