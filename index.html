@@ -162,20 +162,17 @@
             }
 
             if (span) {
-                span.addEventListener('click', () => {
+                span.onclick = function () {
                     hideAllPopups();
-                });
+                }
             }
 
-            // Allow closing by clicking outside if already submitted
-            window.addEventListener('click', (event) => {
+            // Allow closing by clicking outside
+            window.onclick = function (event) {
                 if (event.target == modal) {
-                    const successCard = modal.querySelector('.success-card');
-                    if (successCard) {
-                        hideAllPopups();
-                    }
+                    hideAllPopups();
                 }
-            });
+            }
 
             // Auto-open modal on mobile when page loads
             window.addEventListener('load', () => {
