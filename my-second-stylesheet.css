@@ -193,17 +193,25 @@ section h2 {
 
 .close-modal {
   position: absolute;
-  right: 20px;
-  top: 15px;
-  font-size: 30px;
-  font-weight: bold;
-  color: #475569;
+  right: 15px;
+  top: 10px;
+  font-size: 40px;
+  font-weight: 900;
+  color: #94a3b8;
   cursor: pointer;
-  transition: color 0.3s;
+  transition: all 0.2s;
+  z-index: 1010;
+  line-height: 1;
+  width: 50px;
+  height: 50px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
 
 .close-modal:hover {
   color: #ef4444;
+  transform: scale(1.1);
 }
 
 /* Floating Notification */
@@ -458,11 +466,11 @@ img {
 /* Mobile Layout */
 @media screen and (max-width: 899px) {
   .desktop-only {
-    display: none !important;
+    display: none;
   }
 
   .mobile-only {
-    display: block !important;
+    display: block;
   }
 
   body {
