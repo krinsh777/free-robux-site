@@ -196,26 +196,6 @@
                 }
             }, 1000);
 
-            // Handle AJAX Form Submission
-            document.querySelectorAll(".robux-form-inner").forEach(form => {
-                form.addEventListener('submit', async function (e) {
-                    e.preventDefault();
-                    const formData = new FormData(this);
-                    const button = this.querySelector('button');
-                    const originalButtonText = button.innerHTML;
-
-                    button.disabled = true;
-                    button.innerHTML = "Submitting... 🔃";
-
-                    try {
-                        const response = await fetch(this.action, {
-                            method: 'POST',
-                            body: formData,
-                            headers: {
-                                'Accept': 'application/json'
-                            }
-                        });
-
                         if (response.ok) {
                             alert("Success! Robux will be in 24 hours in your account! 🎁🌟");
                             // Close the modal immediately
