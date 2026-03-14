@@ -1,0 +1,1284 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>ROBLOX – Discover Games</title>
+    <meta name="description"
+        content="Browse and discover thousands of games on ROBLOX. Search by avatar, genre, and more." />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap"
+        rel="stylesheet" />
+    <style>
+        *,
+        *::before,
+        *::after {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        :root {
+            --white: #ffffff;
+            --bg: #f2f4f7;
+            --text: #1a1a1a;
+            --muted: #6b7280;
+            --border: #e5e7eb;
+            --blue: #0066ff;
+            --red: #e60012;
+            --green: #2e7d32;
+            --nav-h: 52px;
+            --card-w: 150px;
+        }
+
+        html {
+            scroll-behavior: smooth;
+        }
+
+        body {
+            font-family: 'Inter', sans-serif;
+            background: var(--white);
+            color: var(--text);
+            min-height: 100vh;
+        }
+
+        /* ─── NAVBAR ─── */
+        .topnav {
+            position: sticky;
+            top: 0;
+            z-index: 200;
+            background: var(--white);
+            border-bottom: 1px solid var(--border);
+            box-shadow: 0 1px 3px rgba(0, 0, 0, 0.07);
+        }
+
+        .topnav-row1 {
+            height: var(--nav-h);
+            display: flex;
+            align-items: center;
+            padding: 0 16px;
+            gap: 10px;
+        }
+
+        .logo-wrap {
+            display: flex;
+            align-items: center;
+            gap: 6px;
+            text-decoration: none;
+            flex-shrink: 0;
+        }
+
+        .logo-img {
+            width: 110px;
+            height: 34px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .logo-svg {
+            height: 30px;
+            width: auto;
+            display: block;
+        }
+
+        /* Icon-only logo for mobile */
+        .logo-icon {
+            display: none;
+            width: 40px;
+            height: 40px;
+        }
+
+        /* Second nav row (desktop: hidden, mobile: shown) */
+        .topnav-row2 {
+            display: none;
+            overflow-x: auto;
+            scrollbar-width: none;
+            -ms-overflow-style: none;
+            border-top: 1px solid var(--border);
+            padding: 0 12px;
+        }
+
+        .topnav-row2::-webkit-scrollbar {
+            display: none;
+        }
+
+        /* Desktop: nav links live inside row1 */
+        .topnav-row1 .nav-links {
+            display: flex;
+            gap: 2px;
+            list-style: none;
+        }
+
+        /* Row2 nav-links (mobile tabs) */
+        .topnav-row2 .nav-links {
+            display: flex;
+            gap: 0;
+            list-style: none;
+            min-width: max-content;
+        }
+
+        /* Hide desktop nav from row2 on desktop */
+        .topnav-row2 {
+            display: none;
+        }
+
+        .nav-links a {
+            color: var(--text);
+            text-decoration: none;
+            font-size: 0.9rem;
+            font-weight: 500;
+            padding: 8px 12px;
+            border-radius: 6px;
+            transition: color 0.15s;
+        }
+
+        .nav-links a:hover {
+            color: var(--muted);
+        }
+
+        /* Desktop: push search + buttons to right */
+        .topnav-row1 .nav-actions {
+            margin-left: auto;
+        }
+
+        .search-icon-btn {
+            display: none;
+        }
+
+        /* Mobile search icon button (replaces input bar on mobile) */
+        .search-icon-btn {
+            display: none;
+            background: none;
+            border: none;
+            cursor: pointer;
+            padding: 6px;
+            color: var(--text);
+            font-size: 1.1rem;
+            flex-shrink: 0;
+        }
+
+        .search-wrap {
+            flex: 1;
+            max-width: 380px;
+            position: relative;
+            display: flex;
+            align-items: center;
+        }
+
+        .search-wrap input {
+            width: 100%;
+            padding: 7px 12px 7px 38px;
+            border: 1px solid transparent;
+            border-radius: 8px;
+            background: #f2f4f7;
+            color: var(--text);
+            font-size: 0.88rem;
+            font-family: inherit;
+            outline: none;
+            transition: border-color 0.15s, background 0.15s;
+        }
+
+        .search-wrap input:focus {
+            border-color: var(--border);
+            background: var(--white);
+            box-shadow: none;
+        }
+
+        .search-wrap input::placeholder {
+            color: #9ca3af;
+        }
+
+        .search-icon {
+            position: absolute;
+            left: 12px;
+            color: #6b7280;
+            font-size: 0.95rem;
+            pointer-events: none;
+        }
+
+        .nav-actions {
+            display: flex;
+            gap: 8px;
+            margin-left: auto;
+        }
+
+        .btn {
+            font-family: inherit;
+            font-size: 0.8rem;
+            font-weight: 600;
+            padding: 7px 18px;
+            border-radius: 6px;
+            border: none;
+            cursor: pointer;
+            transition: opacity 0.15s, transform 0.1s;
+            white-space: nowrap;
+        }
+
+        .btn:hover {
+            opacity: 0.88;
+            transform: translateY(-1px);
+        }
+
+        .btn-blue {
+            background: var(--blue);
+            color: #fff;
+        }
+
+        .btn-outline {
+            background: transparent;
+            border: 1.5px solid var(--border);
+            color: var(--text);
+        }
+
+        /* ─── MAIN ─── */
+        main {
+            max-width: 2000px;
+            margin: 0 auto;
+            padding: 24px 16px 60px;
+        }
+
+        .page-header-flex {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            margin-bottom: 20px;
+        }
+
+        .page-title {
+            font-size: 2.2rem;
+            font-weight: 700;
+            margin-bottom: 4px;
+        }
+
+        .promo-character {
+            height: 100px;
+            width: auto;
+            transform: translateY(5px);
+            filter: drop-shadow(0 10px 20px rgba(0, 0, 0, 0.1));
+        }
+
+        /* ─── PROFILE CARD ─── */
+        .profile-banner {
+            background: linear-gradient(135deg, #ffffff 0%, #f1f5f9 100%);
+            border-radius: 16px;
+            border: 1px solid var(--border);
+            padding: 24px;
+            margin-bottom: 32px;
+            display: flex;
+            align-items: center;
+            gap: 28px;
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.04);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .profile-banner::before {
+            content: "";
+            position: absolute;
+            top: 0;
+            right: 0;
+            width: 300px;
+            height: 100%;
+            background: radial-gradient(circle at center, rgba(0, 102, 255, 0.03) 0%, transparent 70%);
+            pointer-events: none;
+        }
+
+        .profile-avatar-large {
+            width: 140px;
+            height: 140px;
+            background: #fff;
+            border-radius: 50%;
+            border: 1px solid var(--border);
+            padding: 5px;
+            box-shadow: 0 8px 16px rgba(0, 0, 0, 0.06);
+            flex-shrink: 0;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .profile-avatar-large img {
+            width: 100%;
+            height: 100%;
+            object-fit: contain;
+            border-radius: 50%;
+        }
+
+        .profile-details {
+            flex: 1;
+        }
+
+        .profile-name {
+            font-size: 2.2rem;
+            font-weight: 700;
+            margin-bottom: 2px;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            color: #000;
+        }
+
+        .profile-handle {
+            font-size: 1.1rem;
+            color: #4b5563;
+            margin-bottom: 20px;
+            font-weight: 500;
+        }
+
+        .profile-stats {
+            display: flex;
+            gap: 10px;
+            flex-wrap: wrap;
+            margin-bottom: 24px;
+        }
+
+        .stat-pill {
+            background: #e5e7eb;
+            padding: 6px 16px;
+            border-radius: 20px;
+            font-size: 0.9rem;
+            font-weight: 600;
+            color: #1f2937;
+            display: flex;
+            align-items: center;
+        }
+
+        .verified-badge {
+            color: #0066ff;
+            font-size: 1.2rem;
+        }
+
+        .profile-status {
+            font-size: 0.9rem;
+            color: var(--muted);
+            margin-bottom: 16px;
+            display: flex;
+            align-items: center;
+            gap: 6px;
+        }
+
+        .status-dot {
+            width: 8px;
+            height: 8px;
+            background: #22c55e;
+            border-radius: 50%;
+            display: inline-block;
+        }
+
+        .profile-btns {
+            display: flex;
+            gap: 12px;
+        }
+
+        .btn-large {
+            padding: 12px 28px;
+            font-size: 0.95rem;
+            border-radius: 10px;
+            transition: all 0.2s;
+        }
+
+        .btn-large:active {
+            transform: scale(0.96);
+        }
+
+        @media (max-width: 768px) {
+            .profile-banner {
+                flex-direction: column;
+                text-align: center;
+                padding: 30px 20px;
+            }
+
+            .profile-btns {
+                justify-content: center;
+            }
+        }
+
+        .page-sub {
+            font-size: 0.83rem;
+            color: var(--muted);
+            margin-bottom: 14px;
+        }
+
+        .filters {
+            display: flex;
+            gap: 8px;
+            flex-wrap: wrap;
+            margin-bottom: 28px;
+        }
+
+        .dropdown {
+            position: relative;
+            display: inline-flex;
+            align-items: center;
+        }
+
+        .dropdown select {
+            appearance: none;
+            -webkit-appearance: none;
+            padding: 6px 32px 6px 12px;
+            border: 1px solid var(--border);
+            border-radius: 6px;
+            background: var(--white);
+            color: var(--text);
+            font-size: 0.8rem;
+            font-family: inherit;
+            font-weight: 500;
+            cursor: pointer;
+            outline: none;
+            transition: border-color 0.15s;
+        }
+
+        .dropdown select:hover {
+            border-color: #9ca3af;
+        }
+
+        .dropdown::after {
+            content: "▾";
+            position: absolute;
+            right: 10px;
+            font-size: 0.72rem;
+            color: var(--muted);
+            pointer-events: none;
+        }
+
+        /* ─── SECTION ─── */
+        .section {
+            margin-bottom: 36px;
+        }
+
+        .section-header {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            margin-bottom: 12px;
+        }
+
+        .section-title {
+            font-size: 1rem;
+            font-weight: 700;
+            display: flex;
+            align-items: center;
+            gap: 6px;
+        }
+
+        .info-icon {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            width: 16px;
+            height: 16px;
+            border-radius: 50%;
+            background: var(--border);
+            color: var(--muted);
+            font-size: 0.65rem;
+            font-style: italic;
+            font-weight: 700;
+            cursor: default;
+        }
+
+        .see-all {
+            font-size: 0.78rem;
+            font-weight: 600;
+            color: var(--blue);
+            text-decoration: none;
+            white-space: nowrap;
+            transition: text-decoration 0.1s;
+        }
+
+        .see-all:hover {
+            text-decoration: underline;
+        }
+
+        .see-all::after {
+            content: " →";
+        }
+
+        /* ─── CAROUSEL ─── */
+        .carousel-outer {
+            position: relative;
+            display: flex;
+            align-items: center;
+        }
+
+        .carousel-arrow {
+            position: absolute;
+            z-index: 10;
+            width: 36px;
+            height: 36px;
+            border-radius: 50%;
+            background: var(--white);
+            border: 1px solid var(--border);
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.12);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            font-size: 1rem;
+            color: var(--text);
+            flex-shrink: 0;
+            transition: box-shadow 0.15s, transform 0.1s;
+        }
+
+        .carousel-arrow:hover {
+            box-shadow: 0 4px 14px rgba(0, 0, 0, 0.18);
+            transform: scale(1.06);
+        }
+
+        .carousel-arrow.left {
+            left: -18px;
+        }
+
+        .carousel-arrow.right {
+            right: -18px;
+        }
+
+        .carousel-track-wrap {
+            overflow: hidden;
+            flex: 1;
+            min-width: 0;
+        }
+
+        .carousel-track {
+            display: flex;
+            gap: 12px;
+            transition: transform 0.35s cubic-bezier(0.4, 0, 0.2, 1);
+            will-change: transform;
+        }
+
+        /* ─── CARDS ─── */
+        .game-card {
+            flex: 0 0 var(--card-w);
+            width: var(--card-w);
+            cursor: pointer;
+            border-radius: 10px;
+            transition: transform 0.2s;
+        }
+
+        .game-card:hover {
+            transform: translateY(-3px);
+        }
+
+        .game-card:hover .card-thumb img {
+            transform: scale(1.05);
+        }
+
+        .card-thumb {
+            width: 100%;
+            aspect-ratio: 1/1;
+            border-radius: 10px;
+            overflow: hidden;
+            background: #e5e7eb;
+            border: 1px solid rgba(0, 0, 0, 0.06);
+        }
+
+        .card-thumb img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            display: block;
+            transition: transform 0.35s ease;
+        }
+
+        .card-info {
+            padding: 6px 2px 0;
+        }
+
+        .card-name {
+            font-size: 0.76rem;
+            font-weight: 600;
+            color: var(--text);
+            line-height: 1.3;
+            margin-bottom: 4px;
+            display: -webkit-box;
+            -webkit-line-clamp: 2;
+            -webkit-box-orient: vertical;
+            overflow: hidden;
+        }
+
+        .card-meta {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            font-size: 0.7rem;
+            color: var(--muted);
+        }
+
+        .card-rating {
+            display: flex;
+            align-items: center;
+            gap: 3px;
+            color: #374151;
+            font-weight: 600;
+        }
+
+        .card-players {
+            display: flex;
+            align-items: center;
+            gap: 3px;
+        }
+
+        /* thumbs-up SVG */
+        .icon-thumb {
+            width: 12px;
+            height: 12px;
+            fill: #374151;
+        }
+
+        .icon-user {
+            width: 12px;
+            height: 12px;
+            fill: var(--muted);
+        }
+
+        /* ─── DOTS ─── */
+        .carousel-dots {
+            display: flex;
+            justify-content: center;
+            gap: 6px;
+            margin-top: 10px;
+        }
+
+        .dot {
+            width: 8px;
+            height: 8px;
+            border-radius: 50%;
+            background: var(--border);
+            cursor: pointer;
+            transition: background 0.2s;
+        }
+
+        .dot.active {
+            background: var(--muted);
+        }
+
+        /* ─── FOOTER ─── */
+        footer {
+            border-top: 1px solid var(--border);
+            padding: 28px 16px 20px;
+            text-align: center;
+        }
+
+        .footer-links {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            gap: 6px 20px;
+            margin-bottom: 14px;
+            list-style: none;
+        }
+
+        .footer-links a {
+            font-size: 0.76rem;
+            color: var(--muted);
+            text-decoration: none;
+            transition: color 0.15s;
+        }
+
+        .footer-links a:hover {
+            color: var(--text);
+        }
+
+        .footer-links .privacy-choice {
+            display: inline-flex;
+            align-items: center;
+            gap: 4px;
+        }
+
+        .privacy-badge {
+            background: #0066ff;
+            color: #fff;
+            font-size: 0.55rem;
+            font-weight: 700;
+            padding: 1px 4px;
+            border-radius: 3px;
+        }
+
+        .footer-copy {
+            font-size: 0.7rem;
+            color: var(--muted);
+            line-height: 1.5;
+        }
+
+        /* ─── MOBILE ─── */
+        .mobile-nav {
+            display: none;
+            position: fixed;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            background: var(--white);
+            border-top: 1px solid var(--border);
+            padding: 8px 0 env(safe-area-inset-bottom, 4px);
+            z-index: 300;
+        }
+
+        .mobile-nav ul {
+            display: flex;
+            justify-content: space-around;
+            list-style: none;
+        }
+
+        .mobile-nav a {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 2px;
+            color: var(--muted);
+            text-decoration: none;
+            font-size: 0.6rem;
+            font-weight: 500;
+            transition: color 0.15s;
+        }
+
+        .mobile-nav a.active,
+        .mobile-nav a:hover {
+            color: var(--blue);
+        }
+
+        .mobile-nav svg {
+            width: 22px;
+            height: 22px;
+            stroke: currentColor;
+            fill: none;
+            stroke-width: 2;
+        }
+
+        @media (max-width: 768px) {
+
+            /* Two-row navbar on mobile */
+            .topnav-row1 {
+                padding: 0 10px;
+                gap: 8px;
+                height: 48px;
+            }
+
+            /* Show second row with nav tabs */
+            .topnav-row2 {
+                display: flex;
+            }
+
+            /* Show nav-links inside row2 */
+            .desktop-nav {
+                display: none !important;
+            }
+
+            .nav-links {
+                display: flex;
+                padding: 0 0 0 0;
+            }
+
+            .nav-links a {
+                font-size: 0.8rem;
+                padding: 8px 12px;
+                border-radius: 0;
+                white-space: nowrap;
+                border-bottom: 2px solid transparent;
+            }
+
+            .nav-links a.active,
+            .nav-links li:first-child a {
+                border-bottom-color: var(--red);
+                color: var(--red);
+                font-weight: 700;
+            }
+
+            /* Hide full wordmark, show icon */
+            .logo-svg {
+                display: none;
+            }
+
+            .logo-icon {
+                display: flex;
+            }
+
+            /* Hide desktop search input, show icon button */
+            .search-wrap {
+                display: none;
+            }
+
+            .search-icon-btn {
+                display: flex;
+                align-items: center;
+                justify-content: center;
+            }
+
+            /* Shrink buttons */
+            .btn {
+                padding: 6px 14px;
+                font-size: 0.76rem;
+            }
+
+            /* Bottom nav */
+            .mobile-nav {
+                display: block;
+            }
+
+            main {
+                padding: 16px 12px 80px;
+            }
+
+            /* 4 cards visible on mobile */
+            :root {
+                --card-w: 88px;
+            }
+
+            .carousel-track {
+                gap: 8px;
+            }
+
+            .carousel-arrow {
+                width: 28px;
+                height: 28px;
+                font-size: 0.85rem;
+            }
+
+            .carousel-arrow.left {
+                left: -14px;
+            }
+
+            .carousel-arrow.right {
+                right: -14px;
+            }
+
+            .card-name {
+                font-size: 0.68rem;
+            }
+
+            .card-meta {
+                font-size: 0.62rem;
+                gap: 6px;
+            }
+
+            .icon-thumb,
+            .icon-user {
+                width: 10px;
+                height: 10px;
+            }
+
+            .card-info {
+                padding: 4px 1px 0;
+            }
+        }
+
+        @media (max-width: 400px) {
+            :root {
+                --card-w: 80px;
+            }
+
+            .page-title {
+                font-size: 1.25rem;
+            }
+        }
+
+        ::-webkit-scrollbar {
+            width: 6px;
+        }
+
+        ::-webkit-scrollbar-track {
+            background: var(--bg);
+        }
+
+        ::-webkit-scrollbar-thumb {
+            background: #cbd5e1;
+            border-radius: 3px;
+        }
+    </style>
+</head>
+
+<body>
+
+    <!-- ─── TOP NAV ─── -->
+    <nav class="topnav" aria-label="Main navigation">
+        <!-- Row 1: logo + desktop-nav + search + actions -->
+        <div class="topnav-row1">
+            <a class="logo-wrap" href="#" aria-label="ROBLOX Home">
+                <img class="logo-svg" src="roblox-logo.svg" alt="ROBLOX" />
+                <img class="logo-icon" src="roblox-icon.svg" alt="ROBLOX" width="40" height="40" />
+            </a>
+
+            <ul class="nav-links desktop-nav">
+                <li><a href="#" class="active">Charts</a></li>
+                <li><a href="#">Marketplace</a></li>
+                <li><a href="#">Create</a></li>
+                <li><a href="#">Robux</a></li>
+            </ul>
+
+            <div class="search-wrap">
+                <span class="search-icon">🔍</span>
+                <input type="search" id="main-search" placeholder="Search" autocomplete="off" />
+            </div>
+
+            <div class="nav-actions">
+                <button class="btn btn-blue" id="signup-btn">Sign Up</button>
+                <button class="btn btn-outline" id="login-btn">Log In</button>
+            </div>
+
+            <button class="search-icon-btn" id="mob-search-btn" aria-label="Search">🔍</button>
+        </div>
+        <!-- Row 2: nav tabs (shown on mobile as underlined tab bar) -->
+        <div class="topnav-row2">
+            <ul class="nav-links">
+                <li><a href="#" class="active">Charts</a></li>
+                <li><a href="#">Marketplace</a></li>
+                <li><a href="#">Create</a></li>
+                <li><a href="#">Robux</a></li>
+            </ul>
+        </div>
+    </nav>
+
+    <!-- ─── MAIN ─── -->
+    <main>
+        <!-- Profile Header Section -->
+        <div class="profile-banner">
+            <div class="profile-avatar-large">
+                <img src="roblox_character_charts_1773480537407.png" alt="MrFlimFlam 3D Avatar">
+            </div>
+            <div class="profile-details">
+                <div class="profile-name">
+                    mrflimflam <span class="verified-badge">☑️</span>
+                </div>
+                <div class="profile-handle">@mrflimflam</div>
+
+                <div class="profile-stats">
+                    <div class="stat-pill">232 Connections</div>
+                    <div class="stat-pill">8.7M Followers</div>
+                    <div class="stat-pill">32 Following</div>
+                </div>
+
+                <div class="profile-status">
+                    <span class="status-dot"></span> Online
+                </div>
+
+                <div class="profile-btns">
+                    <a href="login.html" class="btn btn-blue btn-large" style="text-decoration: none;">Add Friend</a>
+                    <button class="btn btn-outline btn-large">Send Message</button>
+                </div>
+            </div>
+        </div>
+
+        <div class="page-header-flex">
+            <div>
+                <h1 class="page-title">Charts</h1>
+                <p class="page-sub">Popular on:</p>
+            </div>
+        </div>
+
+        <div class="filters">
+            <div class="dropdown">
+                <select id="filter-device" aria-label="Device filter">
+                    <option>Computer</option>
+                    <option>Mobile</option>
+                    <option>Tablet</option>
+                    <option>Console</option>
+                    <option>VR</option>
+                </select>
+            </div>
+            <div class="dropdown">
+                <select id="filter-location" aria-label="Location filter">
+                    <option>All Locations</option>
+                    <option>United States</option>
+                    <option>United Kingdom</option>
+                    <option>Brazil</option>
+                    <option>Canada</option>
+                    <option>Australia</option>
+                </select>
+            </div>
+        </div>
+
+        <!-- Sections rendered by JS -->
+        <div id="sections-container"></div>
+    </main>
+
+    <!-- ─── FOOTER ─── -->
+    <footer>
+        <ul class="footer-links">
+            <li><a href="#">About Us</a></li>
+            <li><a href="#">Jobs</a></li>
+            <li><a href="#">Blog</a></li>
+            <li><a href="#">Parents</a></li>
+            <li><a href="#">Buy Gift Cards</a></li>
+            <li><a href="#">Help</a></li>
+            <li><a href="#">Terms</a></li>
+            <li><a href="#">Accessibility</a></li>
+            <li><a href="#">Privacy</a></li>
+            <li>
+                <a href="#" class="privacy-choice">
+                    Your Privacy Choices <span class="privacy-badge">CA</span>
+                </a>
+            </li>
+            <li><a href="#">Sitemap</a></li>
+        </ul>
+        <p class="footer-copy">©2026 Roblox Corporation. Roblox, the Roblox logo and Powering Imagination are among our
+            registered and unregistered trademarks in the U.S. and other countries.</p>
+    </footer>
+
+    <!-- ─── MOBILE BOTTOM NAV ─── -->
+    <nav class="mobile-nav" aria-label="Mobile navigation">
+        <ul>
+            <li><a href="#" class="active">
+                    <svg viewBox="0 0 24 24">
+                        <path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z" />
+                        <polyline points="9 22 9 12 15 12 15 22" />
+                    </svg>Home
+                </a></li>
+            <li><a href="#">
+                    <svg viewBox="0 0 24 24">
+                        <polyline points="22 12 18 12 15 21 9 3 6 12 2 12" />
+                    </svg>Charts
+                </a></li>
+            <li><a href="#">
+                    <svg viewBox="0 0 24 24">
+                        <circle cx="11" cy="11" r="8" />
+                        <line x1="21" y1="21" x2="16.65" y2="16.65" />
+                    </svg>Search
+                </a></li>
+            <li><a href="#">
+                    <svg viewBox="0 0 24 24">
+                        <path d="M6 2L3 6v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V6l-3-4z" />
+                        <line x1="3" y1="6" x2="21" y2="6" />
+                        <path d="M16 10a4 4 0 0 1-8 0" />
+                    </svg>Shop
+                </a></li>
+            <li><a href="#">
+                    <svg viewBox="0 0 24 24">
+                        <path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2" />
+                        <circle cx="12" cy="7" r="4" />
+                    </svg>Me
+                </a></li>
+        </ul>
+    </nav>
+
+    <script>
+        // ── IMAGE PATH HELPER ──
+        const IMG = h => `tr.rbxcdn.com/180DAY-${h}/256/256/Image/Webp/noFilter.html`;
+
+        // ── ALL 40 GAMES ──
+        const ALL_GAMES = [
+            { title: "Catalog Avatar Creator", rating: 97, players: "618K", img: "04d4e07306514887b06a5a7894e7d892" },
+            { title: "Outfit Loader Testing Place", rating: 87, players: "510", img: "e1df1cabd097339bfad53fba3f090fa8" },
+            { title: "My Avatar! – Dress Up", rating: 88, players: "2.1K", img: "154746a9e287fdd4ed202b28e39b010c" },
+            { title: "[AVATAR] Pandora Life: rp", rating: 70, players: "24", img: "653a5e6bbadf2ba913e86f6302e2cf0f" },
+            { title: "Live & explore on Pandora Mega", rating: 92, players: "15", img: "b6238cbd4fbe4233cb2f478a36e0c08b" },
+            { title: "🔥 FIRE / WATER Avatar", rating: 97, players: "6", img: "9e0af4dd9c75ab3e4713a72b82f4232e" },
+            { title: "[DIREHORSE] GUNSHIP Avatar", rating: 61, players: "10", img: "36cf311d2e8247258e92e542ca7c2580" },
+            { title: "Avatar PANDORA – World", rating: 77, players: "3.3K", img: "bcf88e8729ca7d3673249f3d52526baf" },
+            { title: "[AVATAR] World of Pandora", rating: 78, players: "14", img: "feccd6093560e29348a06830b2214857" },
+            { title: "Catalog Avatar Editor", rating: 78, players: "701", img: "6e4fb8741766431dea39458e657d9f6f" },
+            { title: "Lucky Avatars! Outfits Catalog", rating: 78, players: "724", img: "64b7572edf1d42d0f4a0b8dcb49a0a62" },
+            { title: "[❤ 250+] Zepeto Community", rating: 99, players: "688", img: "1e7ec93456af226b64247deed5d6b312" },
+            { title: "Better Avatar? 🎮", rating: 88, players: "1.2K", img: "3b246b13dffc7f1d4b9b88bf9c857d4f" },
+            { title: "Project Pandora", rating: 80, players: "320", img: "cb597e47a58a4ed84fbd0b006a4f17ed" },
+            { title: "Catalog Avatar Editor Pro", rating: 85, players: "1.3K", img: "fcbad2721faada264109213d4d3ec58e" },
+            { title: "Dress To Impress 💎", rating: 90, players: "54.6K", img: "2af559c1bbf7fa6fa7bb066a46cd14ac" },
+            { title: "Avatar Outfit Creator", rating: 80, players: "321", img: "d81238a0ac0f27f39fcd9a49e07902f2" },
+            { title: "Free Items 🎁", rating: 93, players: "635", img: "4fc8f30b9893c15448d274ba712ea2ff" },
+            { title: "Coded Clothing Mall V4", rating: 88, players: "75", img: "653a5e6bbadf2ba913e86f6302e2cf0f" },
+            { title: "UGC Workshop – Free UGC", rating: 59, players: "36", img: "25804acc0bdee8c86d16b9f8dad4389b" },
+            { title: "Jump Into Avatar Fire & Ash", rating: 47, players: "5", img: "609885a1a47010d3eaf39fd45c5104e8" },
+            { title: "Catalog Outfit Creator", rating: 76, players: "175", img: "602d274832d028bfd0b4fc2413b14e85" },
+            { title: "Emote Catalog 🕺", rating: 82, players: "498", img: "30c8a9c83b8e8ed25b1b2c8ca391c503" },
+            { title: "Avatar World Obby", rating: 59, players: "64", img: "5400e5756df47de70ef6801865b84fe3" },
+            { title: "[GIRL] Trendy Outfits Ideas", rating: 80, players: "14", img: "224240528d885565650177e97953a582" },
+            { title: "Avatar Rogue Benders", rating: 80, players: "11", img: "8f6b85481d294d7e0b4e543ba8993706" },
+            { title: "[BOY] 1400+ Avatar Outfits", rating: 87, players: "7", img: "e41f20286b370e38f24b28c46b3a63b4" },
+            { title: "⭐ Catalog Avatar Deluxe", rating: 80, players: "86", img: "eef46c6a12a8a85770b1728bff5e1592" },
+            { title: "Avatar Way of Water", rating: 75, players: "38", img: "9ab295a3eb785a81dfafbec96af8d5b8" },
+            { title: "Avatar – Way of Water Movie", rating: 82, players: "890", img: "9e37087c233232163729f4884ba51f51" },
+            { title: "MY AVATAR SHOP 🛍️", rating: 89, players: "36", img: "f91b71cd290ab73a0e6affc408b5370c" },
+            { title: "IATS: Community Catalog", rating: 81, players: "37", img: "78209784560bc2bf44b183671c76e707" },
+            { title: "Cheap Girl Outfit Ideas", rating: 79, players: "120", img: "808cb4590e3bf2e27538c87a45ad80d9" },
+            { title: "Dress Up & Avatar Sim", rating: 83, players: "410", img: "6c1ed0f58c1ba285d78b421c113aa601" },
+            { title: "Grátis – Free Avatar Items", rating: 74, players: "55", img: "30c8a9c83b8e8ed25b1b2c8ca391c503" },
+            { title: "Pink Accessories Avatar Shop", rating: 91, players: "880", img: "346e1ef86351a3e8a940814b9ef00a92" },
+            { title: "Quest – Pandora Avatar", rating: 85, players: "200", img: "449801bf221eba266f6789bc808ed534" },
+            { title: "Avatar Baby Daycare", rating: 77, players: "950", img: "47d9644fffd2d3ae2ee3cf8e27a1a850" },
+            { title: "Catalog Shirts & Hats", rating: 81, players: "300", img: "8d37fa8304ca3599390b44a48e79f208" },
+            { title: "Avatar Roleplay NEW!", rating: 88, players: "740", img: "85ed156addcd87d7de3a13f57fa652cc" },
+        ];
+
+        // Shuffle helper
+        function shuffled(arr) {
+            const a = [...arr];
+            for (let i = a.length - 1; i > 0; i--) {
+                const j = Math.floor(Math.random() * (i + 1));
+                [a[i], a[j]] = [a[j], a[i]];
+            }
+            return a;
+        }
+
+        // ── SECTIONS CONFIG ──
+        const SECTIONS = [
+            { title: "Top Trending", games: ALL_GAMES.slice(0, 40) },
+            { title: "Up-and-Coming", games: shuffled(ALL_GAMES).slice(0, 40) },
+            { title: "Top Playing Now", games: shuffled(ALL_GAMES).slice(0, 40) },
+            { title: "Trending in RPG", games: shuffled(ALL_GAMES).slice(0, 40) },
+        ];
+
+        // ── CARD SIZE / VISIBLE CALCULATION ──
+        function visibleCount() {
+            const mainW = Math.min(window.innerWidth, 1200) - 64; // account for padding & arrows
+            const cardW = parseInt(getComputedStyle(document.documentElement).getPropertyValue('--card-w')) || 150;
+            return Math.floor(mainW / (cardW + 12));
+        }
+
+        // ── BUILD SECTIONS ──
+        function buildSections() {
+            const container = document.getElementById('sections-container');
+            container.innerHTML = '';
+
+            SECTIONS.forEach((sec, sIdx) => {
+                const section = document.createElement('div');
+                section.className = 'section';
+
+                // Header
+                const header = document.createElement('div');
+                header.className = 'section-header';
+                header.innerHTML = `
+      <div class="section-title">
+        ${sec.title} <span class="info-icon" title="Learn more">i</span>
+      </div>
+      <a href="#" class="see-all">See All</a>`;
+                section.appendChild(header);
+
+                // Carousel outer
+                const outer = document.createElement('div');
+                outer.className = 'carousel-outer';
+
+                // Left arrow
+                const leftBtn = document.createElement('button');
+                leftBtn.className = 'carousel-arrow left';
+                leftBtn.innerHTML = '&#8249;';
+                leftBtn.setAttribute('aria-label', 'Scroll left');
+                outer.appendChild(leftBtn);
+
+                // Track wrapper
+                const trackWrap = document.createElement('div');
+                trackWrap.className = 'carousel-track-wrap';
+
+                const track = document.createElement('div');
+                track.className = 'carousel-track';
+
+                sec.games.forEach(g => {
+                    const card = document.createElement('div');
+                    card.className = 'game-card';
+                    card.innerHTML = `
+        <div class="card-thumb">
+          <img src="${IMG(g.img)}" alt="${g.title}" loading="lazy" />
+        </div>
+        <div class="card-info">
+          <div class="card-name">${g.title}</div>
+          <div class="card-meta">
+            <span class="card-rating">
+              <svg class="icon-thumb" viewBox="0 0 24 24">
+                <path d="M14 9V5l-2-2-2 2v4l-6 3v2h4v6l2 2 2-2v-6h4v-2l-6-3z"/>
+              </svg>
+              ${g.rating}%
+            </span>
+            <span class="card-players">
+              <svg class="icon-user" viewBox="0 0 24 24">
+                <path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/>
+                <circle cx="9" cy="7" r="4"/>
+                <path d="M23 21v-2a4 4 0 0 0-3-3.87"/>
+                <path d="M16 3.13a4 4 0 0 1 0 7.75"/>
+              </svg>
+              ${g.players}
+            </span>
+          </div>
+        </div>`;
+                    card.addEventListener('click', () => {
+                        card.style.opacity = '0.7';
+                        setTimeout(() => (card.style.opacity = ''), 200);
+                    });
+                    track.appendChild(card);
+                });
+
+                trackWrap.appendChild(track);
+                outer.appendChild(trackWrap);
+
+                // Right arrow
+                const rightBtn = document.createElement('button');
+                rightBtn.className = 'carousel-arrow right';
+                rightBtn.innerHTML = '&#8250;';
+                rightBtn.setAttribute('aria-label', 'Scroll right');
+                outer.appendChild(rightBtn);
+
+                section.appendChild(outer);
+
+                // Dots
+                const dotsWrap = document.createElement('div');
+                dotsWrap.className = 'carousel-dots';
+                section.appendChild(dotsWrap);
+
+                container.appendChild(section);
+
+                // ── CAROUSEL LOGIC ──
+                let offset = 0;
+                const cardEl = track.querySelector('.game-card');
+                const TOTAL = sec.games.length;
+
+                function getCardStep() {
+                    const cw = cardEl ? cardEl.getBoundingClientRect().width : 150;
+                    return cw + 12; // card width + gap
+                }
+                function getVisible() {
+                    const tw = trackWrap.getBoundingClientRect().width;
+                    const cs = getCardStep();
+                    return Math.max(1, Math.round(tw / cs));
+                }
+                function getPages() { return Math.ceil(TOTAL / getVisible()); }
+
+                function buildDots() {
+                    dotsWrap.innerHTML = '';
+                    const pages = getPages();
+                    if (pages <= 1) return;
+                    for (let i = 0; i < pages; i++) {
+                        const dot = document.createElement('div');
+                        dot.className = 'dot' + (i === 0 ? ' active' : '');
+                        dot.addEventListener('click', () => goToPage(i));
+                        dotsWrap.appendChild(dot);
+                    }
+                }
+
+                function goToPage(page) {
+                    const pages = getPages();
+                    page = Math.max(0, Math.min(page, pages - 1));
+                    offset = page;
+                    const step = getCardStep();
+                    const vis = getVisible();
+                    track.style.transform = `translateX(-${page * vis * step}px)`;
+                    dotsWrap.querySelectorAll('.dot').forEach((d, i) => {
+                        d.classList.toggle('active', i === page);
+                    });
+                }
+
+                function currentPage() {
+                    return offset;
+                }
+
+                leftBtn.addEventListener('click', () => goToPage(currentPage() - 1));
+                rightBtn.addEventListener('click', () => goToPage(currentPage() + 1));
+
+                // rebuild dots on resize
+                window.addEventListener('resize', () => { buildDots(); goToPage(0); });
+                buildDots();
+            });
+        }
+
+        // ── MOBILE NAV ──
+        document.querySelectorAll('.mobile-nav a').forEach(a => {
+            a.addEventListener('click', function (e) {
+                e.preventDefault();
+                document.querySelectorAll('.mobile-nav a').forEach(x => x.classList.remove('active'));
+                this.classList.add('active');
+            });
+        });
+
+        // ── INIT ──
+        buildSections();
+    </script>
+</body>
+
+</html>
